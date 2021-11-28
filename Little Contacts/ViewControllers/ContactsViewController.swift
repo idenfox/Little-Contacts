@@ -74,10 +74,66 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-}
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
-struct Contact {
-    let name: String
-    let number: String
-    let avatarUrl: String
+           let delete = UITableViewRowAction(style: .default, title: "Borrar") { (action, indexPath) in
+               let currentContact = self.contacts[indexPath.row]
+               self.view.activityStartAnimating(activityColor: .brown, backgroundColor: .clear)
+               self.db.collection("contacts").document(currentContact.name).delete() { err in
+                   if let err = err {
+                       self.view.activityStopAnimating()
+                       print("Error removing document: \(err)")
+                   } else {
+                       self.view.activityStopAnimating()
+                       print("Document successfully removed!")
+                       self.tableView.reloadData()
+                   }
+               }
+            }
+            delete.backgroundColor = UIColor.red
+
+            let complete = UITableViewRowAction(style: .default, title: "Editar") { (action, indexPath) in
+                let currentContact = self.contacts[indexPath.row]
+                let alertController = UIAlertController(title: "Editar Contacto",
+                                                        message: "Ingrese nuevo número",
+                                                        preferredStyle: .alert)
+                alertController.addTextField { (textField) in
+                    textField.placeholder = "Nuevo número"
+                    textField.keyboardType = .phonePad
+                }
+                
+                let continueAction = UIAlertAction(title: "Guardar",
+                                                   style: .default) { [weak alertController] _ in
+                                                    guard let textFields = alertController?.textFields else { return }
+                                                    
+                                                    if let numberText = textFields[0].text {
+                                                        print("Nuevo número: \(numberText)")
+                                                        self.view.activityStartAnimating(activityColor: .brown, backgroundColor: .clear)
+                                                        self.db.collection("contacts").document(currentContact.name).setData([
+                                                            "name": currentContact.name,
+                                                            "number": numberText,
+                                                            "avatarUrl": currentContact.avatarUrl
+                                                        ]) { (error) in
+                                                            if let e = error {
+                                                                self.view.activityStopAnimating()
+                                                                print("There was an issue saving data to firestore, \(e)")
+                                                            } else {
+                                                                self.view.activityStopAnimating()
+                                                                print("Successfully saved data.")
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                }
+                let cancelAction = UIAlertAction(title: "Cancelar", style: .default, handler: nil)
+                alertController.addAction(cancelAction)
+                alertController.addAction(continueAction)
+                self.present(alertController,
+                             animated: true)
+            }
+            complete.backgroundColor = UIColor.blue
+
+            return [delete, complete]
+        }
 }

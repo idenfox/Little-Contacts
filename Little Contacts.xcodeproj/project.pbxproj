@@ -19,6 +19,7 @@
 		EDFCE5902751F74F00D803DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDFCE58E2751F74F00D803DB /* Main.storyboard */; };
 		EDFCE5922751F75000D803DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDFCE5912751F75000D803DB /* Assets.xcassets */; };
 		EDFCE5952751F75000D803DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDFCE5932751F75000D803DB /* LaunchScreen.storyboard */; };
+		EDFE935B275309D000311B69 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE935A275309D000311B69 /* Contact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		EDFCE5912751F75000D803DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDFCE5942751F75000D803DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDFCE5962751F75000D803DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDFE935A275309D000311B69 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				EDDEE34D27520A16006D0B93 /* CustomTableViewCell.swift */,
+				EDFCE58E2751F74F00D803DB /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -109,17 +112,25 @@
 		EDFCE5872751F74F00D803DB /* Little Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				EDFE9359275309B300311B69 /* Models */,
 				EDDEE34C275209F8006D0B93 /* View */,
 				EDDEE345275202AA006D0B93 /* ViewControllers */,
 				EDFCE5882751F74F00D803DB /* AppDelegate.swift */,
 				EDFCE58A2751F74F00D803DB /* SceneDelegate.swift */,
-				EDFCE58E2751F74F00D803DB /* Main.storyboard */,
 				EDFCE5912751F75000D803DB /* Assets.xcassets */,
 				EDFCE5932751F75000D803DB /* LaunchScreen.storyboard */,
 				EDFCE5962751F75000D803DB /* Info.plist */,
 				EDDEE3432751F9AC006D0B93 /* GoogleService-Info.plist */,
 			);
 			path = "Little Contacts";
+			sourceTree = "<group>";
+		};
+		EDFE9359275309B300311B69 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EDFE935A275309D000311B69 /* Contact.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +253,7 @@
 				EDFCE5892751F74F00D803DB /* AppDelegate.swift in Sources */,
 				EDFCE58B2751F74F00D803DB /* SceneDelegate.swift in Sources */,
 				EDDEE34E27520A16006D0B93 /* CustomTableViewCell.swift in Sources */,
+				EDFE935B275309D000311B69 /* Contact.swift in Sources */,
 				EDDEE34B27520882006D0B93 /* AddContactViewController.swift in Sources */,
 				EDDEE347275203EB006D0B93 /* RegisterViewController.swift in Sources */,
 				EDDEE34927520873006D0B93 /* ContactsViewController.swift in Sources */,

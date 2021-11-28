@@ -25,7 +25,7 @@ class AddContactViewController: UIViewController {
     @IBAction func addContactTapped(_ sender: UIButton) {
         if let name = nameTextfield.text, let number = numberTextfield.text {
             if (name.count > 0 && number.count > 0) {
-                self.view.activityStartAnimating(activityColor: .yellow, backgroundColor: .clear)
+                self.view.activityStartAnimating(activityColor: .black, backgroundColor: .clear)
                 let storageRef = Storage.storage().reference(forURL: "gs://little-contacts-6df1e.appspot.com")
                 let storageAvatarRef = storageRef.child("avatars").child(name)
                 let metadata = StorageMetadata()
@@ -39,7 +39,7 @@ class AddContactViewController: UIViewController {
                     }
                     storageAvatarRef.downloadURL { url, error in
                         if let metaUrl = url?.absoluteString {
-                            self.db.collection("contacts").addDocument(data: [
+                            self.db.collection("contacts").document(name).setData([
                                 "name": name,
                                 "number": number,
                                 "avatarUrl": metaUrl
